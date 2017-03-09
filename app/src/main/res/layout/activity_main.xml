@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <com.drugdu.widget.TitleBar
+        android:id="@+id/title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/main_color" />
+
+
+    <com.drugdu.widget.ControlScrollViewPager
+        android:id="@+id/contentPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/main_bottom"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/title_bar"
+        android:background="@color/white" />
+
+
+    <LinearLayout
+        android:id="@+id/main_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+
+        <View
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line"
+            android:alpha="0.5"
+            android:background="@color/line_color" />
+
+        <LinearLayout
+            android:id="@+id/layout_foot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:paddingBottom="2dp"
+            android:paddingTop="2dp">
+
+            <TextView
+                android:id="@+id/tab_home"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/tab_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:drawablePadding="3dp"
+                android:padding="2dp"
+                android:drawableTop="@drawable/home"
+                android:focusable="true"
+                android:gravity="center"
+                android:text="@string/txt_home"
+                android:textSize="@dimen/tv_size_small"
+                android:textColor="@drawable/tab_tv_color_selector" />
+
+            <TextView
+                android:id="@+id/tab_cart"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/tab_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:drawablePadding="3dp"
+                android:padding="2dp"
+                android:drawableTop="@drawable/cart"
+                android:focusable="true"
+                android:gravity="center"
+                android:text="@string/txt_cart"
+                android:textSize="@dimen/tv_size_small"
+                android:textColor="@drawable/tab_tv_color_selector" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/tab_message"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/tab_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:drawablePadding="3dp"
+                android:padding="2dp"
+                android:drawableTop="@drawable/comments"
+                android:focusable="true"
+                android:gravity="center"
+                android:text="@string/txt_msg"
+                android:textSize="@dimen/tv_size_small"
+                android:textColor="@drawable/tab_tv_color_selector" />
+
+            <TextView
+                android:id="@+id/tab_my"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/tab_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:drawablePadding="3dp"
+                android:padding="2dp"
+                android:drawableTop="@drawable/account"
+                android:focusable="true"
+                android:gravity="center"
+                android:text="@string/txt_account"
+                android:textSize="@dimen/tv_size_small"
+                android:textColor="@drawable/tab_tv_color_selector" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:orientation="vertical">
+    <ImageView
+        android:id="@+id/iv_add"
+        android:layout_width="58dp"
+        android:layout_height="58dp"
+        android:layout_marginBottom="2dp"
+        android:src="@drawable/tab_post" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/txt_source"
+        android:textColor="@color/main_text_color"
+        android:textSize="@dimen/tv_size_small"
+        android:paddingBottom="4dp"
+        android:layout_below="@id/iv_add"/>
+    </LinearLayout>
+</RelativeLayout>
