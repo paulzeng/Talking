@@ -1,5 +1,6 @@
 package com.thomas.talking.modules.main;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -7,12 +8,17 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.drugdu.ui.BaseActivity;
 import com.drugdu.ui.BaseFragment;
+import com.drugdu.util.LogUtil;
 import com.drugdu.util.UIUtils;
 import com.drugdu.widget.ControlScrollViewPager;
 import com.drugdu.widget.TitleBar;
 import com.jaeger.library.StatusBarUtil;
+import com.netease.scan.IScanModuleCallBack;
+import com.netease.scan.QrScan;
+import com.netease.scan.ui.CaptureActivity;
 import com.thomas.talking.R;
 import com.thomas.talking.modules.main.ui.CartFragment;
 import com.thomas.talking.modules.main.ui.HomeFragment;
@@ -26,7 +32,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity{
 
     @Bind(R.id.title_bar)
     TitleBar titleBar;
@@ -57,13 +63,27 @@ public class MainActivity extends BaseActivity {
         ButterKnife.bind(this);
         StatusBarUtil.setColor(this, UIUtils.getColor(com.drugdu.R.color.main_color), 0);
         initView();
-
     }
 
+    private void setHomeTitle(){
+        titleBar.setSearchTitle(R.drawable.scan,R.drawable.menu,new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                scan();
+            }
+        },new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                ARouter.getInstance()
+                        .build("/category/category_activity")
+                        .navigation();
+            }
+        });
+    }
     private void initView(){
         tabHome.setSelected(true);
         //titleBar.setTitle(R.drawable.scan, "", "Home", R.drawable.menu, "",null,null);
-        titleBar.setSearchTitle(R.drawable.scan,R.drawable.menu,null,null);
+        setHomeTitle();
         //FIX ME 这里需要进行优化
         fragments = new ArrayList<>();
         homeFragment = new HomeFragment();
@@ -90,6 +110,19 @@ public class MainActivity extends BaseActivity {
         mViewPager.setOffscreenPageLimit(4);
     }
 
+    /**
+     * 进入扫码页面，获取返回结果之后回调
+     */
+    private void scan(){
+        QrScan.getInstance().launchScan(MainActivity.this, new IScanModuleCallBack() {
+            @Override
+            public void OnReceiveDecodeResult(final Context context, String result) {
+                LogUtil.e("TAG","Scan Result == "+ result);
+                QrScan.getInstance().finishScan((CaptureActivity)context);
+            }
+        });
+    }
+
     @OnClick({R.id.tab_home, R.id.tab_cart, R.id.tab_message, R.id.tab_my})
     public void tabItemClick(View view) {
         tabHome.setSelected(false);
@@ -102,7 +135,7 @@ public class MainActivity extends BaseActivity {
             case R.id.tab_home:
                 index = 0;
                 //titleBar.setTitle(R.drawable.scan, "", "Home", R.drawable.menu, "",null,null);
-                titleBar.setSearchTitle(R.drawable.scan,R.drawable.menu,null,null);
+                setHomeTitle();
                 tabHome.setSelected(true);
                 break;
             case R.id.tab_cart:
@@ -126,4 +159,6 @@ public class MainActivity extends BaseActivity {
         }
         currentTabIndex = index;
     }
+
+
 }

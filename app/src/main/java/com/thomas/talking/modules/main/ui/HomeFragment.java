@@ -4,13 +4,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.drugdu.ui.BaseFragment;
-import com.drugdu.util.UIUtils;
+import com.drugdu.util.LogUtil;
 import com.drugdu.widget.Carousel;
 import com.thomas.talking.R;
+import com.thomas.talking.base.BaseLoaderFragment;
 import com.thomas.talking.data.DataControl;
+import com.thomas.talking.views.LoadingPage;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -19,7 +19,7 @@ import butterknife.ButterKnife;
  * Created by Administrator on 2017/3/9 0009.
  */
 
-public class HomeFragment extends BaseFragment {
+public class HomeFragment extends BaseLoaderFragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -56,29 +56,36 @@ public class HomeFragment extends BaseFragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        LogUtil.e("TAG","HomeFragment is onCreate");
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        return super.onCreateView(inflater,container,savedInstanceState);
+    }
+
+    @Override
+    public View onCreateSuccessView(LayoutInflater inflater,ViewGroup container) {
         isPrepared = true;
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, view);
+        carousel.startup(DataControl.getBannerData());
         return view;
+    }
+
+
+    @Override
+    public LoadingPage.ResultState onLoad() {
+        return LoadingPage.ResultState.STATE_SUCCESS;
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        carousel.setCallback(new Carousel.ClickCallback() {
-            @Override
-            public void perform(int id, int position) {
-                Toast.makeText(UIUtils.getContext(), "id:" + id + "position" + position,
-                        Toast.LENGTH_LONG).show();
-            }
-        });
-        carousel.startup(DataControl.getBannerData());
+        loadData();
     }
 
     protected void lazyLoad() {
@@ -94,5 +101,11 @@ public class HomeFragment extends BaseFragment {
         ButterKnife.unbind(this);
         //FIX ME 调用下面方法，空指针，说明已经自动销毁
         //carousel.shutdown();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        LogUtil.e("TAG","HomeFragment is onDestroy");
     }
 }

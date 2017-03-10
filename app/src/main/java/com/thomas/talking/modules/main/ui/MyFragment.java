@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.drugdu.ui.BaseFragment;
+import com.drugdu.util.LogUtil;
 import com.thomas.talking.R;
 
 import butterknife.ButterKnife;
@@ -47,6 +48,7 @@ public class MyFragment extends BaseFragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        LogUtil.e("TAG","MyFragment is onCreate");
     }
 
 
@@ -64,5 +66,11 @@ public class MyFragment extends BaseFragment {
             return;
         }
         //填充各控件的数据
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        LogUtil.e("TAG","MyFragment is onDestroy");
     }
 }

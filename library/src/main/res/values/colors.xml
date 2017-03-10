@@ -11,7 +11,8 @@
     <color name="second_text_color">#8a8a8a</color>
     <color name="line_color">#dbdbdb</color>
     <color name="colorInside">#EFEFEF</color>
-    <!---->
+    <!--dot-->
     <color name="dot_nornal">#8a8a8a</color>
     <color name="dot_focus">#dbdbdb</color>
+
 </resources>
