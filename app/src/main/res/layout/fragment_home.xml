@@ -1,9 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tl="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <com.drugdu.widget.Carousel
-        android:id="@+id/home_banner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-</LinearLayout>
+    android:layout_height="match_parent"
+    android:scrollbars="none">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <com.drugdu.widget.Carousel
+            android:id="@+id/home_banner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <com.drugdu.widget.ScrollGridView
+            android:id="@+id/gv_menu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:horizontalSpacing="5dp"
+            android:listSelector="@android:color/transparent"
+            android:numColumns="4"
+            android:padding="5dp"
+            android:scrollbars="none"
+            android:layout_marginBottom="@dimen/margin_normal"
+            android:layout_marginTop="@dimen/margin_normal"
+            android:verticalSpacing="5dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginLeft="@dimen/margin_small"
+                android:text="@string/txt_notice"
+                android:textColor="@color/second_text_color"
+                android:textSize="@dimen/tv_size_normal"/>
+
+            <com.drugdu.widget.Marquee.MarqueeView
+                android:id="@+id/marquee"
+                android:layout_marginLeft="@dimen/margin_small"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <include layout="@layout/layout_home_news"/>
+
+        <com.flyco.tablayout.SlidingTabLayout
+            android:id="@+id/tabHost"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_gravity="center_horizontal"
+            tl:tl_textSelectColor="@color/main_color"
+            tl:tl_textUnselectColor="@color/black"
+            tl:tl_indicator_color="@color/main_color"
+            android:background="@color/white"
+            tl:tl_indicator_anim_enable="true"
+            tl:tl_indicator_bounce_enable="false"
+            tl:tl_tab_space_equal="true"/>
+
+        <com.drugdu.widget.ScrollViewpager
+            android:id="@+id/pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+
+</ScrollView>

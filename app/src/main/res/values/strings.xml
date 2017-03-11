@@ -5,4 +5,12 @@
     <string name="txt_msg">Message</string>
     <string name="txt_account">MyDDU</string>
     <string name="txt_source">Source</string>
+
+    <!--menu-->
+    <string name="txt_service">Procurement\nservice</string>
+    <string name="txt_product">Product\nDirctory</string>
+    <string name="txt_global">Globel\nSuppliers</string>
+    <string name="txt_agency">Agency\nService</string>
+
+    <string name="txt_notice">Notice</string>
 </resources>
